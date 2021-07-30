@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "datingapp",
+    "slug": "datingapp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "datingapp"
+}
