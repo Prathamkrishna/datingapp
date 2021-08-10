@@ -19,15 +19,16 @@ function ConnectSpotify(){
         <RootStack.Navigator>
         <RootStack.Group>
           <RootStack.Screen name="Home" component={UserInfo} options={
-            {headerShown: false}
+            {headerShown: false,
+            title: "Go Back"}
           } />
         </RootStack.Group>
         <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-          <RootStack.Screen name="MyModal" component={SpotifyConnect} options={
+          <RootStack.Screen name="Spotify" component={SpotifyConnect} options={
             {headerShown: false}
           }/>
           <RootStack.Screen name="PickImage" component={ImagePicker} options={
-            {headerShown: false}
+            {title: "Photos"}
           }/>
         </RootStack.Group>
       </RootStack.Navigator>

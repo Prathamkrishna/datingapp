@@ -15,25 +15,30 @@ import {windowWidth, windowHeight} from '../windowdimensions'
 function ImagePicker({navigation}){
     console.log(windowWidth);
     const [images, setImage] = useState([]);
+    let count = 0;
     useEffect(()=>{
-        MediaLibrary.requestPermissionsAsync().then(res=>{
-            console.log(res, "Res")
-        }).catch(err=>{
-            console.log(err)
-        })
-        MediaLibrary.getAssetsAsync({
-            first: 50,
-            mediaType: 'photo'
-        }).then(res=>{
-            setImage(res.assets);
-        }).catch(err=>{
-            console.log(err);
-        })
+        async function fetchUserPerms(){
+            MediaLibrary.requestPermissionsAsync().then(()=>{
+                fetchUserPhotos();
+            }).catch(err=>{
+                console.log(err)
+            })
+        }
+        async function fetchUserPhotos(){
+            MediaLibrary.getAssetsAsync({
+                first: 50,
+                mediaType: 'photo'
+            }).then(res=>{
+                setImage(res.assets);
+            }).catch(err=>{
+                console.log(err);
+            })
+        }
+        fetchUserPerms();
     }, [])
     function navigateBack(val){
-        console.log(val);
         navigation.navigate("Home", {
-            val
+            "image": val
         })
     }
     return(
@@ -42,8 +47,8 @@ function ImagePicker({navigation}){
             <View style={{flexDirection: 'row', flexWrap: "wrap"}}>
                 {images.map((index)=>{
                     return(
-                        <TouchableOpacity onPress={()=>navigateBack(index)}>
-                            <Image source={index} style={styles.images} key={index} />
+                        <TouchableOpacity key={index.id} onPress={()=>navigateBack(index)}>
+                            <Image source={index} style={styles.images} />
                         </TouchableOpacity>
                     )
                 })}
