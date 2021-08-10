@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 //components
 import LoginSelection from './components/loginscreen/loginselection';
 import store from './store/store';
-import ConnectSpotify from './components/userinfo/connectospotify';
+import ConnectSpotify from './components/userinfo/userconnect';
 
 const Stack = createStackNavigator();
 

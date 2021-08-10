@@ -8,8 +8,9 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/cameraroll": "^4.0.4",
     "@react-navigation/native": "^6.0.2",
-    "@react-navigation/stack": "^6.0.2",
+    "@react-navigation/stack": "^6.0.3",
     "@reduxjs/toolkit": "^1.6.1",
     "axios": "^0.21.1",
     "expo": "~42.0.1",
@@ -20,10 +21,13 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-reanimated": "^2.2.0",
     "react-native-web": "~0.13.12",
-    "react-native-webview": "11.6.2"
+    "react-native-webview": "11.6.2",
+    "expo-media-library": "~12.1.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "@types/react": "^17.0.16",
+    "@types/react-native": "^0.64.12"
   },
   "private": true
 }

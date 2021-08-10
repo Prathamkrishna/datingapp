@@ -4,9 +4,13 @@ import {
     Text,
     Modal
 } from 'react-native';
-import WebView from 'react-native-webview';
 import React, { useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
+
+//components
+import UserInfo from './userinfo';
+import SpotifyConnect from './spotifyconnect';
+import ImagePicker from './imagepicker';
 
 const RootStack = createStackNavigator();
 
@@ -14,28 +18,19 @@ function ConnectSpotify(){
     return(
         <RootStack.Navigator>
         <RootStack.Group>
-          <RootStack.Screen name="Home" component={Hi} />
+          <RootStack.Screen name="Home" component={UserInfo} options={
+            {headerShown: false}
+          } />
         </RootStack.Group>
         <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-          <RootStack.Screen name="MyModal" component={Spotify} />
+          <RootStack.Screen name="MyModal" component={SpotifyConnect} options={
+            {headerShown: false}
+          }/>
+          <RootStack.Screen name="PickImage" component={ImagePicker} options={
+            {headerShown: false}
+          }/>
         </RootStack.Group>
       </RootStack.Navigator>
-    )
-}
-
-function Spotify(){
-    return(
-        <WebView source={{uri: "https://www.spotify.com/us/home/"}} />
-    )
-}
-
-function Hi({navigation}){
-    return(
-        <SafeAreaView>
-            <View>
-                <Text onPress={()=>navigation.navigate("MyModal")}>hi</Text>
-            </View>
-        </SafeAreaView>
     )
 }
 
