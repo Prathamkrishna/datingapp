@@ -3,9 +3,11 @@
     "name": "datingapp",
     "slug": "datingapp",
     "version": "1.0.0",
+    "scheme": "datingapp",
     "assetBundlePatterns": [
       "**/*"
     ]
   },
   "name": "datingapp"
+
 }

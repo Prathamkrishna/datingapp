@@ -24,9 +24,6 @@ function ConnectSpotify(){
           } />
         </RootStack.Group>
         <RootStack.Group screenOptions={{ presentation: 'modal' }}>
-          <RootStack.Screen name="Spotify" component={SpotifyConnect} options={
-            {headerShown: false}
-          }/>
           <RootStack.Screen name="PickImage" component={ImagePicker} options={
             {title: "Photos"}
           }/>
