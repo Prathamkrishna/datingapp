@@ -11,7 +11,8 @@ import {
 import React, { useState } from 'react';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import useSpotifyAuth from '../../utils/useSpotifyAuth';
-import {windowHeight, windowWidth} from '../windowdimensions'
+import {windowHeight, windowWidth} from '../windowdimensions';
+import {Picker} from '@react-native-picker/picker';
 
 function UserInfo({route, navigation}){
     const [age, setAge] = useState(18);
@@ -42,18 +43,21 @@ function UserInfo({route, navigation}){
                 </View>
             }
             <View style={styles.chooseButton}>
-                <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}} onPress={()=>navigation.navigate("PickImage")}>pick image</Text>
+                <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}} onPress={()=>navigation.navigate("PickImage")}>Pick image</Text>
+            </View>
+            <View style={styles.chooseButton}>
+                <Text style={{fontSize: 25, padding: 5, textAlign: 'center'}} onPress={()=>navigation.navigate("PickUserGender")}>Pick your preferences</Text>
             </View>
             <View style={styles.chooseButton}>
             <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}}>Enter your age</Text>
             </View>
-            <ScrollView keyboardShouldPersistTaps="never">
+            <ScrollView style={{alignSelf: 'center'}} keyboardShouldPersistTaps="never">
                 <TextInput style={styles.inputAge} onChangeText={value=>setAge(value)} keyboardType="numeric" />
             </ScrollView>
             <View style={styles.chooseButton}>
             <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}} onPress={spotifyConnect}>Connect to Spotify</Text>
             </View>
-            <View style={styles.chooseButton}>
+            <View style={styles.submitButton}>
             <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}}
                 onPress={age>=18 && route.params != undefined ? submitDetails : noDetails}
             >Submit</Text>
@@ -71,8 +75,8 @@ const styles = StyleSheet.create({
     },  
     chooseButton: {
         alignSelf: 'center',
-        marginTop: 50,
-        marginBottom: 30,
+        marginTop: 10,
+        marginBottom: 10,
         width: windowWidth - 130,
         backgroundColor: '#EB7E85',
         borderColor: 'white',
@@ -81,8 +85,13 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     submitButton:{
-        textAlign: 'center',
-        fontSize: 30
+        alignSelf: 'center',
+        width: windowWidth - 130,
+        backgroundColor: 'white',
+        borderColor: 'white',
+        borderWidth: 1,
+        color: 'black',
+        borderRadius: 15,
     },
     inputAge: {
         alignSelf: 'center',

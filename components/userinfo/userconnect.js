@@ -11,6 +11,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import UserInfo from './userinfo';
 import SpotifyConnect from './spotifyconnect';
 import ImagePicker from './imagepicker';
+import PickUserGender from './usergender';
 
 const RootStack = createStackNavigator();
 
@@ -27,6 +28,7 @@ function ConnectSpotify(){
           <RootStack.Screen name="PickImage" component={ImagePicker} options={
             {title: "Photos"}
           }/>
+          <RootStack.Screen name="PickUserGender" component={PickUserGender} />
         </RootStack.Group>
       </RootStack.Navigator>
     )

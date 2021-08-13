@@ -26,7 +26,7 @@ function ImagePicker({navigation}){
         }
         async function fetchUserPhotos(){
             MediaLibrary.getAssetsAsync({
-                first: 50,
+                first: 300,
                 mediaType: 'photo'
             }).then(res=>{
                 setImage(res.assets);
