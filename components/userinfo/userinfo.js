@@ -74,8 +74,8 @@ function UserInfo({route, navigation}){
                     "image": route.params
                 })}>Pick your preferences</Text>
             </View>
-            <View style={styles.chooseButton}>
-                <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}}>Enter your age</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10, justifyContent: 'center'}}>
+                <Text style={{fontSize: 30, padding: 5, textAlign: 'center', color: '#2fe6fa'}}>How old are you?</Text>
             </View>
             <View style={{height: 50}}>
             <ScrollView style={{alignSelf: 'center'}} keyboardShouldPersistTaps="never">
