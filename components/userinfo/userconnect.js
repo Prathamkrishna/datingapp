@@ -2,7 +2,9 @@ import {
     SafeAreaView,
     View,
     Text,
-    Modal
+    Modal,
+    Button,
+    Alert
 } from 'react-native';
 import React, { useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
@@ -28,7 +30,16 @@ function ConnectSpotify(){
           <RootStack.Screen name="PickImage" component={ImagePicker} options={
             {title: "Photos"}
           }/>
-          <RootStack.Screen name="PickUserGender" component={PickUserGender} />
+          <RootStack.Screen name="PickUserGender" component={PickUserGender} options={{
+            title: "Pick your preferences",
+            headerStyle:{
+              backgroundColor: '#13151B',
+              elevation: 0,
+              shadowOpacity: 0,
+            },
+            // headerBackTitle: "Save",
+            headerTintColor: 'white'
+          }} />
         </RootStack.Group>
       </RootStack.Navigator>
     )

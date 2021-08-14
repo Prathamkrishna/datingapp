@@ -8,23 +8,24 @@ import {
     Button,
 } from 'react-native';
 
-//components
-import {windowHeight, windowWidth} from '../windowdimensions.js'
-import {login, logout} from '../../store/reducer';
+//utils
+import {windowHeight, windowWidth} from '../../utils/windowdimensions.js'
 
 //store
+import {login, logout} from '../../store/reducer';
 import store from '../../store/store.js';
 
 function CreateNewAcc(){
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
     function submitFormData(){
-        store.dispatch(login({email, password}))
+        store.dispatch(login({email, password, name}))
     }
     return (
         <View>
             <Text style={styles.textDescription}>Name</Text>
-            <TextInput style={styles.inputBoxes} />
+            <TextInput style={styles.inputBoxes}  onChangeText={value=>setName(value)} />
             <Text style={styles.textDescription}>E-mail</Text>
             <TextInput style={styles.inputBoxes} onChangeText={value=>setEmail(value)} />
             <Text style={styles.textDescription}>Password</Text>

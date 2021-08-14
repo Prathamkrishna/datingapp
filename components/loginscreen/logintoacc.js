@@ -7,11 +7,11 @@ import {
     TextInput,
 } from 'react-native';
 
-//components
-import {windowHeight, windowWidth} from '../windowdimensions.js'
-import {login, logout} from '../../store/reducer';
+//utils
+import {windowHeight, windowWidth} from '../../utils/windowdimensions'
 
 //store
+import {login, logout} from '../../store/reducer';
 import store from '../../store/store.js';
 
 function LoginToAcc(){

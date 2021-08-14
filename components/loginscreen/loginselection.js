@@ -11,7 +11,9 @@ import {
 //components
 import CreateNewAcc from './createnewacc';
 import LoginToAcc from './logintoacc';
-import {windowHeight, windowWidth} from '../windowdimensions.js'
+
+//utils
+import {windowHeight, windowWidth} from '../../utils/windowdimensions'
 
 function LoginSelection(){
     const [select, setSelect] = useState(true);

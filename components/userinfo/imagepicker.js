@@ -10,9 +10,9 @@ import React, { useEffect, useState } from 'react';
 import * as MediaLibrary from 'expo-media-library';
 
 // components
-import {windowWidth, windowHeight} from '../windowdimensions'
+import {windowWidth, windowHeight} from '../../utils/windowdimensions'
 
-function ImagePicker({navigation}){
+function ImagePicker({navigation, route}){
     console.log(windowWidth);
     const [images, setImage] = useState([]);
     let count = 0;

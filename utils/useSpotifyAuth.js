@@ -4,7 +4,6 @@ import { useAuthRequest, makeRedirectUri } from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
 import * as AuthSession from 'expo-auth-session';
-import * as Linking from 'expo-linking'
 
 const discovery = {
   authorizationEndpoint: "https://accounts.spotify.com/authorize",

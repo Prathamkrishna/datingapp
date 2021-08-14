@@ -9,19 +9,23 @@ import {
     Alert
 } from 'react-native';
 import React, { useState } from 'react';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+
+//store
+import {login, logout} from '../../store/reducer';
+import store from '../../store/store.js';
+
+//utils
 import useSpotifyAuth from '../../utils/useSpotifyAuth';
-import {windowHeight, windowWidth} from '../windowdimensions';
-import {Picker} from '@react-native-picker/picker';
+import {windowHeight, windowWidth} from '../../utils/windowdimensions';
 
 function UserInfo({route, navigation}){
-    const [age, setAge] = useState(18);
+    const [age, setAge] = useState("*update this!*");
     const { isAuthenticated, error, authenticateAsync } = useSpotifyAuth();
     const submitDetails = () => {
         console.log("hi");
     }
     const noDetails = () => {
-        Alert.alert("You're not old enough for this app! Come back later")
+        Alert.alert("Oops you missed something? Check if you've filled all the options!")
     }
     const spotifyConnect = () =>{
         authenticateAsync().then(res=>{
@@ -30,9 +34,11 @@ function UserInfo({route, navigation}){
             console.log(err)
         })
     }
+    const userName = store.getState().name;
     return(
         <SafeAreaView style={{backgroundColor: '#13151B', flex: 1}}>
-            <Text style={styles.userGreet}>hii</Text>
+            <ScrollView>
+            <Text style={styles.userGreet}>Hi {userName}!</Text>
             {route.params == undefined ?
                 <View style={styles.imageWrapper}>
                     <Image source={require('../../assets/user-undefined.jpg')} style={styles.userImage} />
@@ -46,22 +52,28 @@ function UserInfo({route, navigation}){
                 <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}} onPress={()=>navigation.navigate("PickImage")}>Pick image</Text>
             </View>
             <View style={styles.chooseButton}>
-                <Text style={{fontSize: 25, padding: 5, textAlign: 'center'}} onPress={()=>navigation.navigate("PickUserGender")}>Pick your preferences</Text>
+                <Text style={{fontSize: 25, padding: 5, textAlign: 'center'}} onPress={()=>navigation.navigate("PickUserGender", {
+                    "image": route.params
+                })}>Pick your preferences</Text>
             </View>
             <View style={styles.chooseButton}>
-            <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}}>Enter your age</Text>
+                <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}}>Enter your age</Text>
             </View>
+            <View style={{height: 50}}>
             <ScrollView style={{alignSelf: 'center'}} keyboardShouldPersistTaps="never">
                 <TextInput style={styles.inputAge} onChangeText={value=>setAge(value)} keyboardType="numeric" />
             </ScrollView>
+            </View>
+            <Text style={{color: 'white', fontSize: 15, marginLeft: 10, textAlign: 'center'}}>You are of {age} years of age!</Text>
             <View style={styles.chooseButton}>
-            <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}} onPress={spotifyConnect}>Connect to Spotify</Text>
+                <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}} onPress={spotifyConnect}>Connect to Spotify</Text>
             </View>
             <View style={styles.submitButton}>
             <Text style={{fontSize: 30, padding: 5, textAlign: 'center'}}
                 onPress={age>=18 && route.params != undefined ? submitDetails : noDetails}
             >Submit</Text>
             </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
@@ -71,12 +83,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white',
         fontSize: 20,
-        marginBottom: 15
+        marginBottom: 7,
+        marginTop: 7,
     },  
     chooseButton: {
         alignSelf: 'center',
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: 25,
+        marginBottom: 25,
         width: windowWidth - 130,
         backgroundColor: '#EB7E85',
         borderColor: 'white',
