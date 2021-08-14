@@ -5,6 +5,7 @@ const initialState = {
     token: "",
     name: "",
     mail: "",
+    userImage: require('../assets/user-undefined.jpg')
 }
 
 const userSlice = createSlice({
@@ -21,9 +22,12 @@ const userSlice = createSlice({
             state.loginState = true,
             state.token = "",
             state.mail = ""
+        },
+        userDetails(state, action){
+            state.userImage = action.payload.image
         }
     }
 })
 
-export const {login, logout} = userSlice.actions;
+export const {login, logout, userDetails} = userSlice.actions;
 export default userSlice.reducer;

@@ -7,14 +7,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 //components
 import LoginSelection from './components/loginscreen/loginselection';
 import store from './store/store';
-import ConnectSpotify from './components/userinfo/userconnect';
+import UserDetails from './components/userinfo/userconnect';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   const [userLoginStatus, setUserLoginStatus] = useState(true);
   store.subscribe(()=>{
-    console.log(store.getState());
     setUserLoginStatus(store.getState().loginState);
   })
   return (
@@ -26,7 +25,7 @@ export default function App() {
         }/>
       </Stack.Navigator>
       :
-      <ConnectSpotify />
+      <UserDetails />
       }
     </NavigationContainer>
   );

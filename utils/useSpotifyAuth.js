@@ -4,6 +4,7 @@ import { useAuthRequest, makeRedirectUri } from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
 import * as AuthSession from 'expo-auth-session';
+import axios from "axios";
 
 const discovery = {
   authorizationEndpoint: "https://accounts.spotify.com/authorize",
@@ -16,14 +17,9 @@ const USE_PROXY = Platform.select({
 const REDIRECT_URI = AuthSession.getDefaultReturnUrl()
 const CLIENT_ID = "fd2e8395e3ba43a183a84dafe1efc168";
 const SCOPE = [
-  'playlist-modify-public',
-  'playlist-modify-private',
-  'user-read-private',
-  'ugc-image-upload',
-  'user-follow-read',
-  'user-library-read',
   'user-top-read',
   'user-read-recently-played',
+  'user-read-private'
 ];
 
 WebBrowser.maybeCompleteAuthSession();
@@ -53,6 +49,7 @@ export default function useSpotifyAuth() {
         setError(authResponse.error);
         return;
       } else if (authResponse.type === "success") {
+        // console.log(authResponse)
       }
     }
 
@@ -64,7 +61,7 @@ export default function useSpotifyAuth() {
     if (result?.type === 'success') {
       const { access_token: token, expires_in: expiresIn } = result.params;
       const expires = new Date().getTime() + Number(expiresIn) * 1000;
-      console.log(token,expires)
+      // console.log(token,expires)
     }
   }, [result?.type]);
   return {

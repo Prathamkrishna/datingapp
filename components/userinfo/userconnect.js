@@ -17,7 +17,7 @@ import PickUserGender from './usergender';
 
 const RootStack = createStackNavigator();
 
-function ConnectSpotify(){
+function UserDetails(){
     return(
         <RootStack.Navigator>
         <RootStack.Group>
@@ -45,4 +45,4 @@ function ConnectSpotify(){
     )
 }
 
-export default ConnectSpotify;
+export default UserDetails;

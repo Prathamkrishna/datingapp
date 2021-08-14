@@ -9,11 +9,14 @@ import {
 import React, { useEffect, useState } from 'react';
 import * as MediaLibrary from 'expo-media-library';
 
+// store
+import { userDetails } from "../../store/reducer";
+import store from "../../store/store";
+
 // components
 import {windowWidth, windowHeight} from '../../utils/windowdimensions'
 
 function ImagePicker({navigation, route}){
-    console.log(windowWidth);
     const [images, setImage] = useState([]);
     let count = 0;
     useEffect(()=>{
@@ -36,9 +39,10 @@ function ImagePicker({navigation, route}){
         }
         fetchUserPerms();
     }, [])
-    function navigateBack(val){
+    function navigateBack(image){
+        store.dispatch(userDetails({image}))
         navigation.navigate("Home", {
-            "image": val
+            "image": image
         })
     }
     return(

@@ -23,7 +23,6 @@ function SpotifyConnect({route, navigation}){
     useEffect(() => {
       if (isAuthenticated) {
         // navigation.replace("MyPlaylists");
-        console.log("meow");
       }
     }, [isAuthenticated]);
 
