@@ -5,7 +5,8 @@ import {
     Text,
     StyleSheet, 
     Image,
-    StatusBar
+    StatusBar,
+    Platform
 } from 'react-native';
 
 //components
@@ -51,19 +52,19 @@ function LoginSelection(){
                 </>
                 }
                 <Image source={
-                    {uri: "https://media.istockphoto.com/photos/couple-together-listening-music-in-cafe-smiling-picture-id1159441480?k=6&m=1159441480&s=612x612&w=0&h=KSqGQ4wDF4oWybV-lpyZJ5nxLX4LBz_oPq9wxdv89t0="}}
+                    require('../../assets/homeimage.png')}
                     style={{width: windowWidth, height: 
-                        imageSize ? (windowHeight - 340) : (windowHeight/3)
+                        imageSize ? Platform.OS == 'ios' ? (windowHeight - 520) : (windowHeight - 400) : (windowHeight/3)
                     }}
                 />
                 {select ? 
                 <>
                 <View style={{maxWidth: '80%'}}>
                     <View style={styles.buttonStyle}>
-                        <Text style={{fontSize: 25, padding: 5, textAlign: 'center'}} onPress={createnew}>Create new account</Text>
+                        <Text style={{fontSize: 25, padding: 15, textAlign: 'center'}} onPress={createnew}>Create new account</Text>
                     </View>
                     <View style={styles.buttonStyle}>
-                        <Text style={{fontSize: 25, padding: 5, textAlign: 'center'}} onPress={login}>Login</Text>
+                        <Text style={{fontSize: 25, padding: 15, textAlign: 'center'}} onPress={login}>Login</Text>
                     </View>
                 </View>
                 </>
@@ -98,14 +99,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     appheading: {
-        fontSize: 40,
+        fontWeight: '300',
+        fontSize: 50,
         color: 'white',
         marginTop: 10,
-        marginBottom: 10,
+        marginBottom: 40,
         textAlign: 'center'
     },
     headingColor: {
-        color: '#EB7E85'
+        color: '#EB7E85',
+        fontWeight: '500'
     },
     buttonStyle: {
         alignSelf: 'center',
