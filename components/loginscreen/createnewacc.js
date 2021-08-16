@@ -30,7 +30,9 @@ function CreateNewAcc(){
             <TextInput style={styles.inputBoxes} onChangeText={value=>setEmail(value)} />
             <Text style={styles.textDescription}>Password</Text>
             <TextInput style={styles.inputBoxes} onChangeText={value=>setPassword(value)} />
-            <Text style={styles.button} onPress={submitFormData}>Submit</Text>
+            <View style={styles.button}>
+                <Text style={{fontSize: 25, padding: 15, textAlign: 'center'}} onPress={submitFormData}>Submit</Text>
+            </View>
         </View>
     )
 }
@@ -51,17 +53,15 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     button: {
-        backgroundColor: 'pink',
-        marginTop: windowHeight/25,
-        fontSize: 25,
-        padding: 10,
-        paddingLeft: 30,
-        paddingRight: 30,
-        borderColor: 'black',
+        alignSelf: 'center',
+        marginTop: 18,
+        marginBottom: 15,
+        width: windowWidth - 130,
+        backgroundColor: '#EB7E85',
+        borderColor: 'white',
         borderWidth: 1,
-        borderStyle: 'solid',
-        borderRadius: 0,
-        textAlign: 'center'
+        color: 'white',
+        borderRadius: 40,
     }
 })
 

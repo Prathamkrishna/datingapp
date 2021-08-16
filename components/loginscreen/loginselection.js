@@ -36,7 +36,7 @@ function LoginSelection(){
         setBackButton(true);
     }
     function goBack(){
-        setHeading(false)
+        setHeading(true)
         setBackButton(false)
         setSelect(true)
         setImageSize(true);
@@ -44,23 +44,27 @@ function LoginSelection(){
     return (
         <SafeAreaView style={styles.fullScreen}>
             <View style={styles.selection}>
-                <Image source={
-                    {uri: "https://media.istockphoto.com/photos/couple-together-listening-music-in-cafe-smiling-picture-id1159441480?k=6&m=1159441480&s=612x612&w=0&h=KSqGQ4wDF4oWybV-lpyZJ5nxLX4LBz_oPq9wxdv89t0="}}
-                    style={{width: windowWidth, height: 
-                        imageSize ? (windowHeight - 310) : (windowHeight/3)
-                    }}
-                />
                 {heading ?
-                <Text style ={styles.appheading}>Dating App</Text>
+                <Text style ={styles.appheading}><Text style={styles.headingColor}>Spotify</Text> meets <Text style={styles.headingColor}>Dating</Text> Online</Text>
                 :
                 <>
                 </>
                 }
+                <Image source={
+                    {uri: "https://media.istockphoto.com/photos/couple-together-listening-music-in-cafe-smiling-picture-id1159441480?k=6&m=1159441480&s=612x612&w=0&h=KSqGQ4wDF4oWybV-lpyZJ5nxLX4LBz_oPq9wxdv89t0="}}
+                    style={{width: windowWidth, height: 
+                        imageSize ? (windowHeight - 340) : (windowHeight/3)
+                    }}
+                />
                 {select ? 
                 <>
                 <View style={{maxWidth: '80%'}}>
-                <Text style={styles.buttonStyle} onPress={createnew}>Create new account</Text>
-                <Text style={styles.buttonStyle} onPress={login}>Login</Text>
+                    <View style={styles.buttonStyle}>
+                        <Text style={{fontSize: 25, padding: 5, textAlign: 'center'}} onPress={createnew}>Create new account</Text>
+                    </View>
+                    <View style={styles.buttonStyle}>
+                        <Text style={{fontSize: 25, padding: 5, textAlign: 'center'}} onPress={login}>Login</Text>
+                    </View>
                 </View>
                 </>
                 :
@@ -86,43 +90,41 @@ function LoginSelection(){
 
 const styles = StyleSheet.create({
     fullScreen: {
-        backgroundColor: '#9fdf9f',
-        // backgroundColor: '#28a428',
-        flex: 1,
-    },
-    statusBar: {
-        backgroundColor: 'white',
-        color: 'white'
+        backgroundColor: '#13151B', 
+        flex: 1
     },
     selection: {
         flexDirection: 'column',
         alignItems: 'center'
     },
     appheading: {
-        fontFamily: "Optima",
-        fontSize: 70,
+        fontSize: 40,
+        color: 'white',
         marginTop: 10,
+        marginBottom: 10,
+        textAlign: 'center'
+    },
+    headingColor: {
+        color: '#EB7E85'
     },
     buttonStyle: {
-        // backgroundColor: '#28a428',
-        // backgroundColor: '#9fdf9f',
-        backgroundColor: 'white',
-        marginTop: 20,
-        fontSize: 25,
-        padding: 10,
-        paddingLeft: 30,
-        paddingRight: 30,
-        borderColor: 'black',
+        alignSelf: 'center',
+        marginTop: 15,
+        marginBottom: 15,
+        width: windowWidth - 130,
+        backgroundColor: '#EB7E85',
+        borderColor: 'white',
         borderWidth: 1,
-        borderStyle: 'solid',
-        borderRadius: 0,
-        textAlign: 'center'
+        color: 'white',
+        borderRadius: 40,
     },
     goBack: {
         marginTop: 10,
+        color: 'white'
     },
     goBackButton: {
-        color: 'blue'
+        paddingLeft: 10,
+        color: '#2fe6fa'
     }
 })
 
