@@ -5,6 +5,10 @@
 #extras
 ./firebaseconfig.js
 
+
+# env file
+vars.js
+
 # Xcode
 #
 ios/

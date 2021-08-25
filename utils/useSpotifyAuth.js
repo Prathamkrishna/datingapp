@@ -5,6 +5,7 @@ import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
 import * as AuthSession from 'expo-auth-session';
 import axios from "axios";
+import { envVariables } from "../vars";
 
 const discovery = {
   authorizationEndpoint: "https://accounts.spotify.com/authorize",
@@ -15,8 +16,8 @@ const USE_PROXY = Platform.select({
   default: Constants.appOwnership === "standalone" ? false : true,
 });
 const REDIRECT_URI = AuthSession.getDefaultReturnUrl()
-// commented out client id
-// const CLIENT_ID = CLIENTid;
+// const CLIENT_ID = "fd2e8395e3ba43a183a84dafe1efc168";
+const CLIENT_ID = envVariables.spotifyClientId;
 const SCOPE = [
   'user-top-read',
   'user-read-recently-played',
