@@ -15,7 +15,8 @@ const USE_PROXY = Platform.select({
   default: Constants.appOwnership === "standalone" ? false : true,
 });
 const REDIRECT_URI = AuthSession.getDefaultReturnUrl()
-const CLIENT_ID = "fd2e8395e3ba43a183a84dafe1efc168";
+// commented out client id
+// const CLIENT_ID = CLIENTid;
 const SCOPE = [
   'user-top-read',
   'user-read-recently-played',
