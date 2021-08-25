@@ -63,7 +63,10 @@ function LoginSelection(){
         <SafeAreaView style={styles.fullScreen}>
             <View style={styles.selection}>
                 {heading ?
-                <Text style ={styles.appheading}><Text style={styles.headingColor}>Spotify</Text> meets <Text style={styles.headingColor}>Dating</Text> Online</Text>
+                <View>
+                    <Text style ={styles.appheading}><Text style={styles.headingColor}>Spotify</Text> meets <Text style={styles.headingColor}>Dating</Text> Online</Text>
+                    <Text style={{textAlign: 'center', fontSize: 20, color: '#EB7E85', fontWeight: '900', marginBottom: 10}}>DATING APP</Text>
+                </View>
                 :
                 <>
                 </>
@@ -99,7 +102,7 @@ const styles = StyleSheet.create({
         fontSize: 50,
         color: 'white',
         marginTop: 10,
-        marginBottom: 40,
+        marginBottom: 20,
         textAlign: 'center'
     },
     headingColor: {

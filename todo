@@ -1,2 +1,4 @@
 change fetch spotify user data to server side
 create a state which displays spotify id on userinfo screen
+convert images to png to improve quality of the image
+get a new home screen image since it is a screenshot
