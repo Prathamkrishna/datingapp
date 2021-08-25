@@ -14,11 +14,13 @@ import UserInfo from './userinfo';
 import SpotifyConnect from './spotifyconnect';
 import ImagePicker from './imagepicker';
 import PickUserGender from './usergender';
+import { NavigationContainer } from '@react-navigation/native';
 
 const RootStack = createStackNavigator();
 
 function UserDetails(){
     return(
+      <NavigationContainer independent={true}>
         <RootStack.Navigator>
         <RootStack.Group>
           <RootStack.Screen name="Home" component={UserInfo} options={
@@ -42,6 +44,7 @@ function UserDetails(){
           }} />
         </RootStack.Group>
       </RootStack.Navigator>
+      </NavigationContainer>
     )
 }
 

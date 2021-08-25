@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     SafeAreaView,
     View,
@@ -6,42 +6,59 @@ import {
     StyleSheet, 
     Image,
     StatusBar,
-    Platform
+    Platform,
+    TouchableOpacity,
+    Alert
 } from 'react-native';
-
-//components
-import CreateNewAcc from './createnewacc';
-import LoginToAcc from './logintoacc';
+import axios from 'axios';
 
 //utils
+import useSpotifyAuth from '../../utils/useSpotifyAuth';
 import {windowHeight, windowWidth} from '../../utils/windowdimensions'
 
+//store
+import { appAccess, getuserdetails, login, fetchUserSpotifyData } from '../../store/reducer';
+import store from '../../store/store';
+
 function LoginSelection(){
-    const [select, setSelect] = useState(true);
-    const [logintype, setLogintype] = useState(true);
     const [heading, setHeading] = useState(true);
     const [imageSize, setImageSize] = useState(true);
-    const [backbutton, setBackButton] = useState(false);
-    function createnew(){
-        setSelect(false);
-        setLogintype(true);
-        setHeading(false)
-        setImageSize(false)
-        setBackButton(true);
+    const [usertoken, setuserToken] = useState();
+    const { isAuthenticated, error, authenticateAsync } = useSpotifyAuth();
+    function spotifyConnect(){
+        authenticateAsync().then((res)=>{
+            // getUserInfo(res.authentication.accessToken);
+            setuserToken(res.authentication.accessToken);
+            // store.dispatch(fetchUserSpotifyData(res.authentication.accessToken))
+            // fetchUserSpotifyData(res.authentication.accessToken)
+        }).catch(err=>{
+            console.log(err)
+        })
     }
-    function login(){
-        setSelect(false);
-        setLogintype(false)
-        setHeading(false)
-        setImageSize(false);
-        setBackButton(true);
-    }
-    function goBack(){
-        setHeading(true)
-        setBackButton(false)
-        setSelect(true)
-        setImageSize(true);
-    }
+    useEffect(()=>{
+        axios.get('https://api.spotify.com/v1/me',  {headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${usertoken}`},
+    }).then(res=>{
+        console.log(res.data);
+        store.dispatch(getuserdetails());
+        axios.post('http://localhost:8080/postuserdetails', {
+            "username": res.data.display_name,
+            "password": "abc",
+            "email": res.data.email
+        }).then(resp=>{
+            console.log(resp.data, "resp")
+            // store.dispatch(appAccess());
+        }).catch(err=>{
+            Alert.alert("An error occured, check your internet connection and try again")
+            console.error(err);
+        })
+    }).catch(err=>{
+        console.error(err)
+    })
+    }, [usertoken])
+    console.log(windowWidth);
     return (
         <SafeAreaView style={styles.fullScreen}>
             <View style={styles.selection}>
@@ -54,36 +71,15 @@ function LoginSelection(){
                 <Image source={
                     require('../../assets/homeimage.png')}
                     style={{width: windowWidth, height: 
-                        imageSize ? Platform.OS == 'ios' ? (windowHeight - 520) : (windowHeight - 400) : (windowHeight/3)
+                        imageSize ? Platform.OS == 'android' ? windowHeight - 400 : windowWidth < 390 ? (windowHeight - 400) : (windowHeight - 520) : (windowHeight/3)
                     }}
+                    
                 />
-                {select ? 
-                <>
                 <View style={{maxWidth: '80%'}}>
-                    <View style={styles.buttonStyle}>
-                        <Text style={{fontSize: 25, padding: 15, textAlign: 'center'}} onPress={createnew}>Create new account</Text>
-                    </View>
-                    <View style={styles.buttonStyle}>
-                        <Text style={{fontSize: 25, padding: 15, textAlign: 'center'}} onPress={login}>Login</Text>
-                    </View>
+                    <TouchableOpacity style={windowHeight < 800 ? styles.buttonStyle : styles.chooseButtonmoreheight}>
+                        <Text style={{fontSize: 25, padding: 5, textAlign: 'center'}} onPress={spotifyConnect}>Login with Spotify</Text>
+                    </TouchableOpacity>
                 </View>
-                </>
-                :
-                   logintype ?
-                   <CreateNewAcc />
-                   : 
-                   <LoginToAcc />
-                }
-                {
-                    backbutton ?
-                    <Text style={styles.goBack}>
-                        Think you made a mistake?
-                        <Text style={styles.goBackButton} onPress={goBack}>Go back</Text>
-                    </Text>
-                    :
-                    <>
-                    </>
-                }
             </View>
         </SafeAreaView>
     )
@@ -110,6 +106,28 @@ const styles = StyleSheet.create({
         color: '#EB7E85',
         fontWeight: '500'
     },
+    chooseButtonlessheight: {
+        alignSelf: 'center',
+        marginTop: 10,
+        marginBottom: 10,
+        width: windowWidth - 130,
+        backgroundColor: '#EB7E85',
+        borderColor: 'white',
+        borderWidth: 1,
+        color: 'white',
+        borderRadius: 15,
+    },
+    chooseButtonmoreheight: {
+        alignSelf: 'center',
+        marginTop: 25,
+        marginBottom: 25,
+        width: windowWidth - 130,
+        backgroundColor: '#EB7E85',
+        borderColor: 'white',
+        borderWidth: 1,
+        color: 'white',
+        borderRadius: 15,
+    },
     buttonStyle: {
         alignSelf: 'center',
         marginTop: 15,
@@ -122,7 +140,7 @@ const styles = StyleSheet.create({
         borderRadius: 40,
     },
     goBack: {
-        marginTop: 10,
+        marginTop: 20,
         color: 'white'
     },
     goBackButton: {

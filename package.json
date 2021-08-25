@@ -11,6 +11,7 @@
     "@react-native-community/cameraroll": "^4.0.4",
     "@react-native-community/datetimepicker": "3.5.2",
     "@react-native-picker/picker": "1.16.1",
+    "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.0.3",
     "@reduxjs/toolkit": "^1.6.1",
@@ -22,6 +23,7 @@
     "expo-media-library": "~12.1.2",
     "expo-random": "~11.2.0",
     "expo-status-bar": "~1.0.4",
+    "firebase": "8.2.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
@@ -29,7 +31,8 @@
     "react-native-reanimated": "^2.2.0",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
-    "react-native-webview": "11.6.2"
+    "react-native-webview": "11.6.2",
+    "sharp": "^0.29.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

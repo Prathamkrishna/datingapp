@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Platform } from "react-native";
+import { Alert, Platform } from "react-native";
 import { useAuthRequest, makeRedirectUri } from "expo-auth-session";
 import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
@@ -19,7 +19,8 @@ const CLIENT_ID = "fd2e8395e3ba43a183a84dafe1efc168";
 const SCOPE = [
   'user-top-read',
   'user-read-recently-played',
-  'user-read-private'
+  'user-read-private',
+  'user-read-email'
 ];
 
 WebBrowser.maybeCompleteAuthSession();

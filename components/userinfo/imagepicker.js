@@ -16,7 +16,7 @@ import store from "../../store/store";
 // components
 import {windowWidth, windowHeight} from '../../utils/windowdimensions'
 
-function ImagePicker({navigation, route}){
+function ImagePicker({navigation}){
     const [images, setImage] = useState([]);
     let count = 0;
     useEffect(()=>{
