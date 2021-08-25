@@ -16,7 +16,6 @@ const USE_PROXY = Platform.select({
   default: Constants.appOwnership === "standalone" ? false : true,
 });
 const REDIRECT_URI = AuthSession.getDefaultReturnUrl()
-// const CLIENT_ID = "fd2e8395e3ba43a183a84dafe1efc168";
 const CLIENT_ID = envVariables.spotifyClientId;
 const SCOPE = [
   'user-top-read',
