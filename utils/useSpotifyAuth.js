@@ -5,7 +5,7 @@ import * as WebBrowser from "expo-web-browser";
 import Constants from "expo-constants";
 import * as AuthSession from 'expo-auth-session';
 import axios from "axios";
-import { envVariables } from "../vars";
+import { envVariables } from "../env";
 
 const discovery = {
   authorizationEndpoint: "https://accounts.spotify.com/authorize",

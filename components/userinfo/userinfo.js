@@ -57,6 +57,8 @@ function UserInfo({route, navigation}){
             headers: {
                 'Content-type': 'multipart/form-data'
             }
+        }, {
+            "name": username
         }).then(res=>{
             console.log(res, "Ress");
             store.dispatch(login({username}))
