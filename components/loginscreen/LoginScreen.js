@@ -20,7 +20,7 @@ import {windowHeight, windowWidth} from '../../utils/windowdimensions'
 import { appAccess, getuserdetails, login, fetchUserSpotifyData } from '../../store/reducer';
 import store from '../../store/store';
 
-function LoginSelection(){
+function LoginScreen(){
     const [heading, setHeading] = useState(true);
     const [imageSize, setImageSize] = useState(true);
     const [usertoken, setuserToken] = useState();
@@ -32,6 +32,7 @@ function LoginSelection(){
             // store.dispatch(fetchUserSpotifyData(res.authentication.accessToken))
             // fetchUserSpotifyData(res.authentication.accessToken)
         }).catch(err=>{
+            Alert.alert("Check your internet connection and try again later")
             console.log(err)
         })
     }
@@ -152,4 +153,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default LoginSelection;
+export default LoginScreen;

@@ -5,11 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 //components
-import LoginSelection from './components/loginscreen/loginselection';
+import LoginScreen from './components/loginscreen/LoginScreen';
 import store from './store/store';
-import UserDetails from './components/userinfo/userconnect';
-import UserApp from './components/mainapp/userapp';
-import UserInfo from './components/userinfo/userinfo';
+import UserDetails from './components/userinfo';
+import UserApp from './components/mainapp';
 
 const Stack = createStackNavigator();
 
@@ -28,7 +27,7 @@ export default function App() {
         :
         userLoginStatus ?
         <Stack.Navigator>
-          <Stack.Screen name="login" component={LoginSelection} options={
+          <Stack.Screen name="login" component={LoginScreen} options={
             {headerShown: false}
           }/>
         </Stack.Navigator>
