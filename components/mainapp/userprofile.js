@@ -31,7 +31,8 @@ function UserProfile(){
         <SafeAreaView style={{backgroundColor: '#13151B', flex: 1}}>
             <View>
                 <View style={styles.imageWrapper}>
-                        <Image source={store.getState().userImage} style={styles.userImage} />
+                    {/* <Image source={store.getState().userImage} style={styles.userImage} /> */}
+                    <Image source={image} style={styles.userImage} />
                 </View>
                 <Text style={styles.usergreet}>{store.getState().name}, age</Text>
             </View>

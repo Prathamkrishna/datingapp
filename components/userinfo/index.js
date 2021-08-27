@@ -11,7 +11,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 //components
 import UserInfo from './userinfo';
-import SpotifyConnect from './spotifyconnect';
 import ImagePicker from './imagepicker';
 import PickUserGender from './usergender';
 import { NavigationContainer } from '@react-navigation/native';

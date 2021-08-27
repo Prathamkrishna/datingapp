@@ -29,36 +29,20 @@ function LoginScreen(){
         authenticateAsync().then((res)=>{
             // getUserInfo(res.authentication.accessToken);
             setuserToken(res.authentication.accessToken);
-            // store.dispatch(fetchUserSpotifyData(res.authentication.accessToken))
-            // fetchUserSpotifyData(res.authentication.accessToken)
+            axios.post("http://localhost:8080/user/spotify/token", {
+                "token": res.authentication.accessToken
+            }).then(()=>{
+                console.log("done")
+                // dispatch store according to the response(whether user exists in db or not)
+                store.dispatch(getuserdetails());
+            }).catch(e=>{
+                console.error(e);
+            })
         }).catch(err=>{
             Alert.alert("Check your internet connection and try again later")
             console.log(err)
         })
     }
-    useEffect(()=>{
-        axios.get('https://api.spotify.com/v1/me',  {headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${usertoken}`},
-    }).then(res=>{
-        console.log(res.data);
-        store.dispatch(getuserdetails());
-        axios.post('http://localhost:8080/postuserdetails', {
-            "username": res.data.display_name,
-            "password": "abc",
-            "email": res.data.email
-        }).then(resp=>{
-            console.log(resp.data, "resp")
-            // store.dispatch(appAccess());
-        }).catch(err=>{
-            Alert.alert("An error occured, check your internet connection and try again")
-            console.error(err);
-        })
-    }).catch(err=>{
-        console.error(err)
-    })
-    }, [usertoken])
     console.log(windowWidth);
     return (
         <SafeAreaView style={styles.fullScreen}>

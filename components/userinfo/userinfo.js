@@ -37,19 +37,6 @@ function UserInfo({route, navigation}){
             type: "image/jpeg",
             name: store.getState().userImage.filename
         })
-        // axios.post("http://localhost:8080/postuserdetails", {
-        //     "username": username,
-        //     "age": age,
-        //     "image": store.getState().userImage.filename
-        // }).then(res=>{
-        //     console.log(res, "Ress");
-        //     store.dispatch(login({username}))
-        //     store.dispatch(appAccess())
-        //     // console.log("hi");
-        // }).catch(err=>{
-        //     Alert.alert("An error occurred, please try again later")
-        //     console.log(err);
-        // })
         axios({
             url: "http://localhost:8080/image/upload",
             data: formdata,
@@ -57,8 +44,6 @@ function UserInfo({route, navigation}){
             headers: {
                 'Content-type': 'multipart/form-data'
             }
-        }, {
-            "name": username
         }).then(res=>{
             console.log(res, "Ress");
             store.dispatch(login({username}))
@@ -67,6 +52,14 @@ function UserInfo({route, navigation}){
         }).catch(err=>{
             Alert.alert("Exceeded file size")
             console.log(err);
+        })
+        axios.post("http://localhost:8080/user/postlogindetails", {
+            "username": username,
+            "age": age
+        }).then(()=>{
+            console.log("dne")
+        }).catch(err=>{
+            console.error(err);
         })
     }
     const noDetails = () => {
