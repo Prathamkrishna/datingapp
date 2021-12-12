@@ -11,10 +11,12 @@ import {
     Alert
 } from 'react-native';
 import axios from 'axios';
+import {envVariables as server} from '../../env';
 
 //utils
 import useSpotifyAuth from '../../utils/useSpotifyAuth';
 import {windowHeight, windowWidth} from '../../utils/windowdimensions'
+import {internetAlert} from '../../utils/Alerts';
 
 //store
 import { appAccess, getuserdetails, login, fetchUserSpotifyData } from '../../store/reducer';
@@ -23,27 +25,30 @@ import store from '../../store/store';
 function LoginScreen(){
     const [heading, setHeading] = useState(true);
     const [imageSize, setImageSize] = useState(true);
-    const [usertoken, setuserToken] = useState();
+    // const [usertoken, setuserToken] = useState();
     const { isAuthenticated, error, authenticateAsync } = useSpotifyAuth();
     function spotifyConnect(){
         authenticateAsync().then((res)=>{
-            // getUserInfo(res.authentication.accessToken);
-            setuserToken(res.authentication.accessToken);
-            axios.post("http://localhost:8080/user/spotify/token", {
+            // setuserToken(res.authentication.accessToken);
+            axios.post(server.serverAuthenticateUrl, {
                 "token": res.authentication.accessToken
-            }).then(()=>{
-                console.log("done")
-                // dispatch store according to the response(whether user exists in db or not)
-                store.dispatch(getuserdetails());
+            }).then((res)=>{
+                console.log(res.data);
+                if(res.data.userExists){
+                    // redirect to main app
+                    store.dispatch(appAccess({jwtToken: res.data.jwt}))
+                } else{
+                    // redirect to create acc
+                    store.dispatch(getuserdetails({jwtToken: res.data.jwt, email: res.data.email, display_name: res.data.display_name}))
+                }
             }).catch(e=>{
-                console.error(e);
+                internetAlert();
             })
         }).catch(err=>{
-            Alert.alert("Check your internet connection and try again later")
+            internetAlert();
             console.log(err)
         })
     }
-    console.log(windowWidth);
     return (
         <SafeAreaView style={styles.fullScreen}>
             <View style={styles.selection}>

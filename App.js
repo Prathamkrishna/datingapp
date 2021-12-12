@@ -13,10 +13,10 @@ import UserApp from './components/mainapp';
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [userLoginStatus, setUserLoginStatus] = useState(true);
+  const [userLoginStatus, setUserLoginStatus] = useState(false);
   const [appAccess, setAppAccess] = useState(false);
   store.subscribe(()=>{
-    console.log(store.getState().loginState, "meow")
+    console.log(store.getState().loginState, "updated app.js")
     setUserLoginStatus(store.getState().loginState);
     setAppAccess(store.getState().isLogin);
   })
@@ -26,13 +26,13 @@ export default function App() {
         <UserApp />
         :
         userLoginStatus ?
+        <UserDetails />
+        :
         <Stack.Navigator>
           <Stack.Screen name="login" component={LoginScreen} options={
             {headerShown: false}
           }/>
         </Stack.Navigator>
-        :
-        <UserDetails />
       }
     </NavigationContainer>
   );

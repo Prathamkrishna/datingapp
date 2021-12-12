@@ -19,14 +19,13 @@ function UserProfile(){
     useEffect(()=>{
         axios.get("http://localhost:8080/random")
             .then(res=>{
-                console.log(res.data.image)
+                // console.log(res.data.image)
                 setImage(res.data.image)
             })
             .catch(err=>{
                 console.log(err);
             })
     })
-    console.log(store.getState().userImage)
     return(
         <SafeAreaView style={{backgroundColor: '#13151B', flex: 1}}>
             <View>

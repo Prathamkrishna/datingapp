@@ -41,9 +41,11 @@ function ImagePicker({navigation}){
     }, [])
     function navigateBack(image){
         store.dispatch(userDetails({image}))
-        navigation.navigate("Home", {
-            "image": image
-        })
+        navigation.navigate("Home")
+        console.log("dispatched action in image picker and updated" + store.getState().userImage);
+        // , {
+        //     "image": image
+        // })
     }
     return(
         <SafeAreaView>

@@ -10,7 +10,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import React, { useState } from 'react';
-import * as AuthSession from 'expo-auth-session'
+import axios from 'axios';
 
 //store
 import {login, appAccess, logout, userDetails} from '../../store/reducer';
@@ -22,7 +22,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 //utils
 import useSpotifyAuth from '../../utils/useSpotifyAuth';
 import {windowHeight, windowWidth} from '../../utils/windowdimensions';
-import axios from 'axios';
+import {envVariables as server} from '../../env';
 
 function UserInfo({route, navigation}){
     const [age, setAge] = useState("*update this!*");
@@ -35,32 +35,46 @@ function UserInfo({route, navigation}){
         formdata.append('image', {
             uri: store.getState().userImage.uri,
             type: "image/jpeg",
-            name: store.getState().userImage.filename
+            name: store.getState().mail,
+            // email: store.getState().mail
         })
-        axios({
-            url: "http://localhost:8080/image/upload",
-            data: formdata,
-            method: 'POST',
+        console.log(formdata);
+        // axios({
+        //     url: server.serverImagePostUrl,
+        //     params: formdata,
+        //     // data: {
+        //     //     "name": username,
+        //     //     "age": age,
+        //     //     "selfGender": "",
+        //     //     "searchPreferenceGender": "",
+        //     // },
+        //     method: 'POST',
+        //     headers: {
+        //         // Authorization: "Bearer " + store.getState().token,
+        //         'Content-Type': 'multipart/form-data'
+        //     }
+        // })
+        axios.post(server.serverImagePostUrl, formdata, {
             headers: {
-                'Content-type': 'multipart/form-data'
-            }
-        }).then(res=>{
-            console.log(res, "Ress");
-            store.dispatch(login({username}))
-            store.dispatch(appAccess())
+                'Content-Type': 'multipart/form-data',
+                'Authorization': "Bearer " + store.getState().token,
+        }
+        })
+        .then(res=>{
+            console.log(res.data, "Ress");
+            // store.dispatch(login({username}))
+            // store.dispatch(appAccess())
             // console.log("hi");
         }).catch(err=>{
             Alert.alert("Exceeded file size")
             console.log(err);
         })
-        axios.post("http://localhost:8080/user/postlogindetails", {
-            "username": username,
-            "age": age
-        }).then(()=>{
-            console.log("dne")
-        }).catch(err=>{
-            console.error(err);
-        })
+        // axios.post("http://localhost:8080/user/postlogindetails", {
+        // }).then(()=>{
+        //     console.log("dne")
+        // }).catch(err=>{
+        //     console.error(err);
+        // })
     }
     const noDetails = () => {
         // Alert.alert(AuthSession.getDefaultReturnUrl())
@@ -68,6 +82,7 @@ function UserInfo({route, navigation}){
     }
     console.log(windowHeight)
     store.subscribe(()=>{
+        // console.log("subscribed store recieved" + store.getState().userImage);
         setImage(store.getState().userImage);
     })
     return(
@@ -106,7 +121,7 @@ function UserInfo({route, navigation}){
                 <TextInput style={styles.inputAge} maxLength={2} onChangeText={value=>setAge(value)} keyboardType="numeric" />
             </ScrollView>
             </View>
-            <Text style={{color: 'white', fontSize: 15, marginLeft: 10, textAlign: 'center'}}>You are of {age} years of age!</Text>
+            <Text style={{color: 'white', fontSize: 15, marginLeft: 10, textAlign: 'center'}}>You are {age} years old!</Text>
             <TouchableOpacity style={styles.submitButton} 
                 onPress={age>=18 && username != null && image != undefined ? submitDetails : noDetails}
             >
